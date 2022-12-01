@@ -1,0 +1,1 @@
+-FileReader() - is a native class on javascript that work for read the file we upload to app, and allow show a preview image.
