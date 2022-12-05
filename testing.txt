@@ -1,0 +1,19 @@
+Tipo de pruebas:
+
+- pruebas unitarias: son las pruebas que se le hace a un componente aislado del codigo.
+- pruebas de integracion: son las pruebas que usan 2 o mas componentes juntos.
+- pruebas de end to end: son las pruebas que se hacen desde el inicio hasta el final del sistema.
+
+curiosidades:
+
+- si se le coloca una x antes del describe o al it, se omite la prueba.
+- ng test --code-coverage para ver el porcentaje de cobertura de las pruebas.
+- uno se puede subscribir sin problemas dentro de una prueba y no tiene problemas con el asincronismo.
+
+
+espias:
+
+- los espias son un tipo de interceptor en donde se le debe pasar el servicio y el nombre del metodo que se requiere espiar, para luego poder retornar lo que uno quiera o hacer diversas acciones
+- se puede usar el spyOn para espiar un metodo y luego usar el toHaveBeenCalledWith para verificar que se llamo con los parametros correctos.
+- se puede usar el spyOn para espiar un metodo y luego usar el toHaveBeenCalled para verificar que se llamo.
+- se puede usar el spyOn para espiar un metodo y luego usar el and callFake para retornar lo que uno quiera.

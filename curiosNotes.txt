@@ -1,1 +1,5 @@
--FileReader() - is a native class on javascript that work for read the file we upload to app, and allow show a preview image.
+-FileReader() - is a native class on javascript that work for read the file we upload to app, and allow show a preview images.
+
+
+
+- Se puede agregar metodos a la clase observable importandolo desde rxjs/add/observable/xx , despues del observable agregar el operador que quieres agregar.
