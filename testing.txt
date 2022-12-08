@@ -17,3 +17,28 @@ espias:
 - se puede usar el spyOn para espiar un metodo y luego usar el toHaveBeenCalledWith para verificar que se llamo con los parametros correctos.
 - se puede usar el spyOn para espiar un metodo y luego usar el toHaveBeenCalled para verificar que se llamo.
 - se puede usar el spyOn para espiar un metodo y luego usar el and callFake para retornar lo que uno quiera.
+
+
+pruebas de integracion
+
+
+- testBed - es un modulo uqe nos permite crear un modulo de prueba, para poder hacer las pruebas pertinenetes a un componente.
+- componentFixture - es un objeto que nos permite acceder a las propiedades del componente que estamos probando (es parecido a jquery y se usa para manejar el dom).
+- fixture.debugElement.query - es un metodo que nos permite buscar un elemento en el dom.
+- by.css - es un metodo que nos permite buscar un elemento por su clase css. 
+- fixture.debugElement.queryAll - es un metodo que nos permite buscar varios elementos en el dom.
+- fixture.debugElement.nativeElement - es un metodo que nos permite acceder al elemento nativo del dom.
+- fixture.detectChanges - es un metodo que nos permite detectar los cambios en el dom.
+- fixture.whenStable - es un metodo que nos permite esperar a que se resuelvan las promesas de los cambios de estado dentro del componente.
+- fixture.componentInstance - es un metodo que nos permite acceder a las propiedades del componente que estamos probando.
+
+
+Testing de rutas.
+
+
+- para probar si una ruta existe hay que especificar que una ruta especifica esta en el array de rutas.
+- para probar bien las rutas se requiere importar en el testBed el modulo de rutas de testing el cual es RouterTestingModule.withRoutes(routes).
+- para testear que hay existe una directiva dentro del html se usa el metodo query y se le pasa el by.directive(NombreDeLaDirectiva). ejemplo: fixture.debugElement.query(by.directive(RouterOutlet)).
+- para testear las direccion a la que apunta un componente routerLink entonces se usa el metodo query y se le pasa el by.directive(RouterLinkWithHref). ejemplo: fixture.debugElement.query(by.directive(RouterLinkWithHref)). y se evalua que el atributo routerLink sea igual al que se espera.
+- para evitar que de un error al estar usando en el html un componente que no se esta evaluando en el testing, entonces en el testBed en el schemas: [NO_ERRORS_SCHEMA].
+- 
