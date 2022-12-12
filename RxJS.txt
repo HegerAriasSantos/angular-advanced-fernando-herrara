@@ -1,0 +1,112 @@
+Observable
+
+a observable is a stream of data that can be used to emit data from a source and pass it to a subscriber. It is a function that takes as its arguments the functions you want to combine, and returns a new function that, when executed, runs the composed functions in sequence.
+
+
+Ways to create a observable:
+
+- of: is useful when you have individual values (Quick way to unit test your code). 
+Ej:
+const obs$ = of(1,2,3,4,5);
+
+- from: is useful when you have an array that already groups the values you want.
+Ej: 
+const obs$ = from([1,2,3,4,5]);
+
+- new Observable( observer => { ... } ) - receives an Observer and returns a Subscription, with the the Observer's next, error, and complete methods as arguments.
+Ej: 
+const obs$ = new Observable( observer => {
+  observer.next(1);
+  observer.next(2);
+  observer.next(3);
+  observer.next(4);
+  observer.next(5);
+  observer.complete();
+});
+
+- fromEvent: is useful when you want to listen to events from the DOM.
+Ej:
+const obs$ = fromEvent(document, 'click');
+
+- fromEventPattern: is useful when you want to listen to events from the DOM, but you need to add extra logic to the event handler.
+Ej:
+const obs$ = fromEventPattern(
+  handler => document.addEventListener('click', handler),
+  handler => document.removeEventListener('click', handler)
+);
+
+- interval: is useful when you want to emit a value every x milliseconds.
+Ej:
+const obs$ = interval(1000);
+
+- timer: is useful when you want to emit a value after x milliseconds.
+Ej:
+const obs$ = timer(1000);
+
+- ajax: is useful when you want to make an AJAX request.
+Ej:
+const obs$ = ajax('https://api.github.com/users?per_page=5');
+
+- fromFetch: is useful when you want to make an AJAX request.
+Ej:
+const obs$ = fromFetch('https://api.github.com/users?per_page=5').pipe(
+  switchMap(response => {
+    if (response.ok) {
+      // OK return data
+      return response.json();
+    } else {
+      // Server is returning a status requiring the client to try something else.
+
+      return throwError('Error');
+    }
+  })
+)
+
+- webSocket: is useful when you want to make a WebSocket connection.
+Ej:
+const obs$ = webSocket('wss://echo.websocket.org');
+
+
+
+observer.next(value) - notifies the Observer that a new value is available.
+observer.error(error) - notifies the Observer that an error has occurred.
+observer.complete() - notifies the Observer that the Observable has completed.
+
+
+- obs$.subscribe( 
+  value => { ... } - receives a function that is called when the Observable emits a value, and returns a Subscription.
+  error => { ... } - receives a function that is called when the Observable emits an error, and returns a Subscription.
+  () => { ... } - receives a function that is called when the Observable completes, and returns a Subscription.
+  )
+
+
+Pipe: It is used to chain multiple operators into a single function. It is a function that takes as its arguments the functions you want to combine, and returns a new function that, when executed, runs the composed functions in sequence.
+
+Pipes:
+
+PD: The operators are executed in the order they are specified in the pipe() function.
+
+- retry(3) - retries a failed Observable up to a specified number of times before failing. If the count is not specified, it retries indefinitely.
+- take(3) - takes the first n values from an Observable, then completes, where n is the argument passed to take. If n is not specified, it returns all values in the source Observable.
+- map - transforms the items emitted by an Observable by applying a function to each item. It is a function that takes as its arguments the functions you want to combine, and returns a new function that, when executed, runs the composed functions in sequence.
+- filter - filters the items emitted by an Observable by only emitting those that satisfy a specified predicate, that return true or false when passed to the predicate function.
+- thorttleTime - cada x tiempo deja de emitir los datos y vuelve a empezar a emitirlos, como un zip zap de datos.
+- scan - es literalmente un reducer.
+- tap es para ejecutar una función sin modificar los datos
+- take es para tomar los primeros n datos
+- takeUntil es para tomar los datos hasta que se emita un valor en otro observable
+- debounceTime es para esperar un tiempo antes de emitir los datos
+- distinctUntilChanged es para emitir los datos solo si son diferentes al anterior
+- switchMap es para cancelar las peticiones anteriores y solo emitir los datos de la última petición
+- mergeMap es para emitir los datos de todas las peticiones
+- catchError es para capturar los errores
+- retry es para reintentar una petición
+- shareReplay es para compartir los datos entre los subscriptores
+- startWith es para emitir un valor antes de los datos
+- combineLatest es para combinar los datos de varios observables
+- withLatestFrom es para combinar los datos de un observable con los datos de otro observable
+- zip es para combinar los datos de varios observables y emitirlos en un array
+- forkJoin es para combinar los datos de varios observables y emitirlos en un objeto
+
+
+
